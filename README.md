@@ -51,29 +51,44 @@
 
 🔄 변환 처리:
 
-Flink SQL로 변환
+**Flink SQL로 변환**
 
 WHERE 조건을 기반으로 CEP 패턴 생성
 
 🚀 출력 예시 (CEP Java 코드):
 
-java
-복사
-편집
+### 🔸 Flink CEP Java 코드 예시
+```java
+import org.apache.flink.cep.pattern.Pattern;
+import org.apache.flink.cep.pattern.conditions.SimpleCondition;
+
 Pattern<Event, ?> pattern = Pattern.<Event>begin("start")
     .where(new SimpleCondition<Event>() {
         @Override
         public boolean filter(Event event) {
-            return event.amount > 10000 && "KR".equals(event.region);
+            return event.getAmount() > 10000 && "KR".equals(event.getRegion());
         }
     });
-또는 출력 예시 (JSON DSL):
+```
 
+### 🔸 JSON 기반 룰 정의
+
+```json
 {
   "pattern": "start",
   "conditions": [
-    { "field": "amount", "op": ">", "value": 10000 },
-    { "field": "region", "op": "==", "value": "KR" }
+    {
+      "field": "amount",
+      "op": ">",
+      "value": 10000
+    },
+    {
+      "field": "region",
+      "op": "==",
+      "value": "KR"
+    }
   ]
 }
+```
+
 
