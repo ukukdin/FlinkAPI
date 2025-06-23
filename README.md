@@ -66,9 +66,6 @@ Pattern<Event, ?> pattern = Pattern.<Event>begin("start")
     });
 또는 출력 예시 (JSON DSL):
 
-json
-복사
-편집
 {
   "pattern": "start",
   "conditions": [
@@ -76,3 +73,4 @@ json
     { "field": "region", "op": "==", "value": "KR" }
   ]
 }
+
