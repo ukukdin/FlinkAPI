@@ -1,3 +1,6 @@
+
+![image](https://github.com/user-attachments/assets/fe42a080-d35c-4c0e-a3dc-9b6450429f71)
+
 # 개요
 
 > ✨ 이 라이브러리는 MySQL SQL을 Apache Flink에서 실행 가능한 코드(Flink SQL, Table API, CEP Pattern)로 변환해주는 Java 기반 도구입니다.  
