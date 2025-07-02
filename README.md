@@ -92,3 +92,96 @@ Pattern<Event, ?> pattern = Pattern.<Event>begin("start")
 ```
 
 
+graph TB
+    subgraph "📚 FlinkCEP Library API"
+        FlinkCEPLibrary["🚀 FlinkCEPLibrary<br/>+ addRule(String, String)<br/>+ addRule(Rule)<br/>+ processEvents(DataStream)<br/>+ getAllRules()<br/>+ removeRule(String)<br/>+ clearAllRules()"]
+        
+        Builder["🏗️ Builder<br/>+ withExecutionEnvironment()<br/>+ withAlertHandler()<br/>+ build()"]
+        
+        FlinkCEPLibrary --> Builder
+    end
+
+    subgraph "📊 Core Domain Models"
+        Event["📊 Event<br/>- eventId, eventType<br/>- userId, timestamp<br/>- amount, region<br/>- deviceType, properties<br/><br/>+ withUserId()<br/>+ withAmount()<br/>+ withRegion()<br/>+ isHighValueTransaction()<br/>+ isFromKorea()"]
+        
+        Rule["📋 Rule<br/>- ruleId, ruleName<br/>- ruleType, conditions<br/>- timeWindow, severity<br/>- sequenceSteps<br/><br/>+ withConditions()<br/>+ withTimeWindow()<br/>+ withSeverity()"]
+        
+        subgraph "Rule Components"
+            RuleType["🎯 RuleType<br/>SINGLE_EVENT<br/>SEQUENCE<br/>THRESHOLD<br/>FREQUENCY<br/>ANOMALY"]
+            Condition["🔍 Condition<br/>- field, operator<br/>- value, logicalOperator"]
+            TimeWindow["⏰ TimeWindow<br/>- duration, unit<br/>+ toMilliseconds()"]
+            SequenceStep["🔗 SequenceStep<br/>- stepName, eventType<br/>- conditions, optional"]
+        end
+        
+        Rule --> RuleType
+        Rule --> Condition
+        Rule --> TimeWindow
+        Rule --> SequenceStep
+    end
+
+    subgraph "🔧 Engine Layer"
+        RuleEngine["🔥 RuleEngine<br/>+ registerRule(Rule)<br/>+ unregisterRule(String)<br/>+ applyRules(DataStream)<br/>+ getAllRules()<br/>+ getRuleMatchingStats()"]
+        
+        CEPPatternBuilder["🏗️ CEPPatternBuilder<br/>+ buildPattern(Rule)<br/>+ buildSingleEventPattern()<br/>+ buildSequencePattern()<br/>+ buildFrequencyPattern()"]
+        
+        RuleParserService["🧠 RuleParserService<br/>+ parseRule(String, String)<br/>+ parseSequenceRule()<br/>+ parseFrequencyRule()<br/>+ getExampleRules()"]
+        
+        RuleMatchResult["📋 RuleMatchResult<br/>- ruleId, ruleName<br/>- severity, triggerEvent<br/>- matchedEvents<br/>- matchTime, message"]
+    end
+
+    subgraph "⚡ Apache Flink Integration"
+        FlinkEnv["🌊 StreamExecutionEnvironment"]
+        FlinkStream["📡 DataStream&lt;Event&gt;"]
+        FlinkPattern["🔍 Pattern&lt;Event&gt;"]
+        FlinkSink["📤 FlinkCEPSink"]
+        
+        FlinkEnv --> FlinkStream
+        FlinkPattern --> FlinkStream
+        FlinkStream --> FlinkSink
+    end
+
+    %% Library API Dependencies
+    FlinkCEPLibrary --> RuleEngine
+    FlinkCEPLibrary --> RuleParserService
+    FlinkCEPLibrary --> FlinkEnv
+    FlinkCEPLibrary --> FlinkSink
+    
+    %% Engine Dependencies
+    RuleEngine --> Rule
+    RuleEngine --> Event
+    RuleEngine --> CEPPatternBuilder
+    RuleEngine --> RuleMatchResult
+    
+    CEPPatternBuilder --> Rule
+    CEPPatternBuilder --> FlinkPattern
+    
+    RuleParserService --> Rule
+    
+    %% Flow
+    FlinkCEPLibrary -.-> |"1. Parse"| RuleParserService
+    FlinkCEPLibrary -.-> |"2. Register"| RuleEngine
+    FlinkCEPLibrary -.-> |"3. Process"| FlinkStream
+    RuleEngine -.-> |"4. Build Pattern"| CEPPatternBuilder
+    CEPPatternBuilder -.-> |"5. Apply CEP"| FlinkPattern
+
+    %% Usage Example
+    subgraph "📝 Usage Example"
+        Usage1["FlinkCEPLibrary cepLib = FlinkCEPLibrary.builder()<br/>.withExecutionEnvironment(env)<br/>.withAlertHandler(alert -> print(alert))<br/>.build();"]
+        Usage2["cepLib.addRule(&quot;한국에서 로그인 이후 중국에서 이체&quot;, &quot;사기패턴&quot;);"]
+        Usage3["cepLib.processEvents(eventStream);"]
+        
+        Usage1 --> Usage2
+        Usage2 --> Usage3
+    end
+
+    classDef libraryClass fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    classDef domainClass fill:#f3e5f5,stroke:#7b1fa2
+    classDef engineClass fill:#e8f5e8,stroke:#388e3c
+    classDef flinkClass fill:#fff3e0,stroke:#f57c00
+    classDef usageClass fill:#fce4ec,stroke:#c2185b
+
+    class FlinkCEPLibrary,Builder libraryClass
+    class Event,Rule,RuleType,Condition,TimeWindow,SequenceStep domainClass
+    class RuleEngine,CEPPatternBuilder,RuleParserService,RuleMatchResult engineClass
+    class FlinkEnv,FlinkStream,FlinkPattern,FlinkSink flinkClass
+    class Usage1,Usage2,Usage3 usageClass
