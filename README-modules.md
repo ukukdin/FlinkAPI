@@ -82,9 +82,9 @@ flink-cep-parent (pom)
 </dependency>
 ```
 
-## 🔧 빌드 및 사용 방법
+## 빌드 및 사용 방법
 
-### 📥 전체 빌드
+### 전체 빌드
 
 ```bash
 # 루트 디렉토리에서 전체 모듈 빌드
@@ -98,7 +98,7 @@ mvn clean install -pl flink-cep-domain
 
 각 프로젝트의 필요에 따라 필요한 모듈만 선택적으로 사용할 수 있습니다:
 
-#### 1️⃣ 최소 구성 (도메인만)
+#### 1️ 최소 구성 (도메인만)
 ```xml
 <dependency>
     <groupId>com.flinkapi</groupId>
@@ -107,7 +107,7 @@ mvn clean install -pl flink-cep-domain
 </dependency>
 ```
 
-#### 2️⃣ 비즈니스 로직 + 응용 서비스
+#### 2️ 비즈니스 로직 + 응용 서비스
 ```xml
 <dependency>
     <groupId>com.flinkapi</groupId>
@@ -116,7 +116,7 @@ mvn clean install -pl flink-cep-domain
 </dependency>
 ```
 
-#### 3️⃣ 완전한 구성 (올인원)
+#### 3️ 완전한 구성 (올인원)
 ```xml
 <dependency>
     <groupId>com.flinkapi</groupId>
@@ -127,7 +127,7 @@ mvn clean install -pl flink-cep-domain
 
 ## 🎨 사용 예제
 
-### 📚 기본 도메인 사용 (Domain Only)
+### 기본 도메인 사용 (Domain Only)
 
 ```java
 import com.flinkapi.cep.domain.model.Event;
@@ -174,7 +174,7 @@ app.registerRule(sampleRule)
    .execute("My CEP Application");
 ```
 
-## 🔗 의존성 그래프
+## 의존성 그래프
 
 ```mermaid
 graph TD
@@ -204,25 +204,25 @@ graph TD
 
 | 목적 | 권장 모듈 | 설명 |
 |------|----------|------|
-| 🏗️ 도메인 모델만 사용 | `flink-cep-domain` | 다른 시스템에서 CEP 도메인 모델을 재사용 |
-| 🎯 비즈니스 로직 구현 | `flink-cep-application` | 자체 인프라로 CEP 비즈니스 로직 구현 |
-| 🔧 Flink 기반 구현 | `flink-cep-infrastructure` | Flink를 사용한 완전한 CEP 시스템 |
-| 🌐 웹 API 서버 | `flink-cep-interfaces` | REST API와 함께 CEP 시스템 구축 |
-| 🚀 빠른 시작 | `flink-cep-starter` | 모든 기능을 포함한 올인원 패키지 |
+| 도메인 모델만 사용 | `flink-cep-domain` | 다른 시스템에서 CEP 도메인 모델을 재사용 |
+| 비즈니스 로직 구현 | `flink-cep-application` | 자체 인프라로 CEP 비즈니스 로직 구현 |
+| Flink 기반 구현 | `flink-cep-infrastructure` | Flink를 사용한 완전한 CEP 시스템 |
+| 웹 API 서버 | `flink-cep-interfaces` | REST API와 함께 CEP 시스템 구축 |
+| 빠른 시작 | `flink-cep-starter` | 모든 기능을 포함한 올인원 패키지 |
 
-## 🔒 DDD 레이어 규칙
+##  DDD 레이어 규칙
 
-### ✅ 허용되는 의존성 방향
+### 허용되는 의존성 방향
 - **Interfaces** → **Application** → **Domain**
 - **Infrastructure** → **Application** → **Domain**
 - **Starter** → 모든 모듈
 
-### ❌ 금지되는 의존성 방향
+###  금지되는 의존성 방향
 - **Domain** → 다른 레이어 (Domain은 독립적)
 - **Application** → **Infrastructure** (인터페이스로 역전)
 - **Application** → **Interfaces** (인터페이스로 역전)
 
-## 📚 더 많은 정보
+##  더 많은 정보
 
 - [DDD 아키텍처 가이드](README-DDD.md)
 - [라이브러리 사용법](README-library.md)

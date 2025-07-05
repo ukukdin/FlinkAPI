@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 📝 룰 업데이트 명령 객체 - 룰 업데이트를 위한 Command 객체
- * DDD 패턴으로 설계된 Command
+ * 룰 업데이트 명령 객체 - 룰 업데이트를 위한 Command 객체
+ * 
  */
 public class RuleUpdateCommand {
     

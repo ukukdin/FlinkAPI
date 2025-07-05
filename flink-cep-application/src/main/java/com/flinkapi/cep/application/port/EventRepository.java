@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * 🗃️ 이벤트 리포지토리 포트 인터페이스 - 이벤트 영속성 계층의 추상화
- * DDD 패턴으로 설계된 Repository 인터페이스
+ * 이벤트 리포지토리 포트 인터페이스 - 이벤트 영속성 계층의 추상화
+ * 
  */
 public interface EventRepository {
     

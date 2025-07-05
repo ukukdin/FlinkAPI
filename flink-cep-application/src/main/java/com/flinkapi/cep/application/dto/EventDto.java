@@ -3,8 +3,8 @@ package com.flinkapi.cep.application.dto;
 import java.util.Map;
 
 /**
- * 📦 이벤트 데이터 전송 객체 - 이벤트 정보를 외부로 전달하는 DTO
- * DDD 패턴으로 설계된 DTO
+ *  이벤트 데이터 전송 객체 - 이벤트 정보를 외부로 전달하는 DTO
+ * 
  */
 public class EventDto {
     

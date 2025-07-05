@@ -12,28 +12,23 @@
         <version>1.0.0</version>
     </parent>
 
-    <!-- 🔧 Infrastructure 모듈 정의 -->
     <artifactId>flink-cep-infrastructure</artifactId>
     <packaging>jar</packaging>
 
     <name>FlinkAPI CEP Library - Infrastructure</name>
     <description>인프라 레이어 - 외부 시스템 연동 및 기술적 구현</description>
 
-    <!-- 📦 의존성 -->
     <dependencies>
-        <!-- 🏛️ Domain 모듈 의존성 -->
         <dependency>
             <groupId>com.flinkapi</groupId>
             <artifactId>flink-cep-domain</artifactId>
         </dependency>
 
-        <!-- 🎮 Application 모듈 의존성 -->
         <dependency>
             <groupId>com.flinkapi</groupId>
             <artifactId>flink-cep-application</artifactId>
         </dependency>
 
-        <!-- 🌊 Apache Flink -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-java_2.12</artifactId>
@@ -47,19 +42,16 @@
             <artifactId>flink-connector-kafka_2.12</artifactId>
         </dependency>
 
-        <!-- 📝 JSON 처리 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
-        <!-- 📊 로깅 -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
-        <!-- 🧪 테스트 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -72,7 +64,6 @@
         </dependency>
     </dependencies>
 
-    <!-- 🔧 빌드 설정 -->
     <build>
         <plugins>
             <plugin>

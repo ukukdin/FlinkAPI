@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 🔥 도메인 이벤트 엔티티 - 실시간 이벤트의 핵심 도메인 모델
- * DDD 패턴으로 설계된 이벤트 엔티티
+ * 도메인 이벤트 엔티티 - 실시간 이벤트의 핵심 도메인 모델
+ * 
  */
 public class Event implements Serializable {
     
@@ -54,7 +54,7 @@ public class Event implements Serializable {
         this.eventType = eventType;
     }
 
-    // 🚀 Fluent API 스타일 빌더 메서드들
+    //  Fluent API 스타일 빌더 메서드들
     public Event withUserId(String userId) {
         this.userId = userId;
         return this;

@@ -14,8 +14,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * 🎯 룰 관리 응용 서비스 - 룰 관리 유스케이스를 구현하는 Application Service
- * DDD 패턴으로 설계된 응용 서비스
+ * 룰 관리 응용 서비스 - 룰 관리 유스케이스를 구현하는 Application Service
+ *
  */
 public class RuleManagementService {
     

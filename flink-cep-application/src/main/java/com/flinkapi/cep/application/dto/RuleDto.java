@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 📦 룰 데이터 전송 객체 - 룰 정보를 외부로 전달하는 DTO
- * DDD 패턴으로 설계된 DTO
+ * 룰 데이터 전송 객체 - 룰 정보를 외부로 전달하는 DTO
+ * 
  */
 public class RuleDto {
     
