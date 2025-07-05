@@ -334,8 +334,8 @@ FlinkAPI/
 
 ## 👥 개발자 정보
 
-- **개발팀**: FlinkAPI Team
-- **이메일**: contact@flinkapi.com
+- **개발팀**: IDC4 Team
+- **이메일**: eum714211@gmail.com
 - **GitHub**: [@ukukdin](https://github.com/ukukdin)
 
 ---
