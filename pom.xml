@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 🚀 FlinkAPI - DDD 구조의 멀티모듈 프로젝트 -->
+    <groupId>com.flinkapi</groupId>
+    <artifactId>flink-cep-parent</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>FlinkAPI CEP Library - Parent</name>
+    <description>DDD 구조로 설계된 Apache Flink 기반 실시간 CEP 라이브러리</description>
+    <url>https://github.com/ukulkdin/FlinkAPI</url>
+
+    <!-- 📦 멀티모듈 정의 -->
+    <modules>
+        <module>flink-cep-domain</module>
+        <module>flink-cep-application</module>
+        <module>flink-cep-infrastructure</module>
+        <!-- <module>flink-cep-interfaces</module> --> <!-- 별도 배포 예정 -->
+        <module>flink-cep-starter</module>
+    </modules>
+
+    <!-- 🔧 공통 속성 -->
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <!-- 라이브러리 버전 -->
+        <flink.version>1.14.6</flink.version>
+        <spring.boot.version>2.7.5</spring.boot.version>
+        <jackson.version>2.13.4</jackson.version>
+        <slf4j.version>1.7.36</slf4j.version>
+        <junit.version>5.8.2</junit.version>
+        <mockito.version>4.6.1</mockito.version>
+    </properties>
+
+    <!-- 🎯 의존성 관리 (BOM) -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- 🌱 Spring Boot BOM -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 🏗️ FlinkAPI 모듈들 -->
+            <dependency>
+                <groupId>com.flinkapi</groupId>
+                <artifactId>flink-cep-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.flinkapi</groupId>
+                <artifactId>flink-cep-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.flinkapi</groupId>
+                <artifactId>flink-cep-infrastructure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- 
+            <dependency>
+                <groupId>com.flinkapi</groupId>
+                <artifactId>flink-cep-interfaces</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            --> <!-- 별도 배포 예정 -->
+
+            <!-- 🌊 Apache Flink -->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-streaming-java_2.12</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-cep_2.12</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-connector-kafka_2.12</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+
+            <!-- 📝 JSON 처리 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <!-- 📊 로깅 -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <!-- 🧪 테스트 -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 🔧 빌드 설정 -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Maven Compiler Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.10.1</version>
+                    <configuration>
+                        <source>8</source>
+                        <target>8</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+
+                <!-- Maven Surefire Plugin (테스트) -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M7</version>
+                </plugin>
+
+                <!-- Maven Source Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Maven Javadoc Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.4.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <!-- 👥 개발자 정보 -->
+    <developers>
+        <developer>
+            <id>ukulkdin</id>
+            <name>FlinkAPI Team</name>
+            <email>contact@flinkapi.com</email>
+            <url>https://github.com/ukulkdin</url>
+        </developer>
+    </developers>
+
+    <!-- 📄 라이선스 -->
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- 🔗 SCM 정보 -->
+    <scm>
+        <connection>scm:git:https://github.com/ukulkdin/FlinkAPI.git</connection>
+        <developerConnection>scm:git:https://github.com/ukulkdin/FlinkAPI.git</developerConnection>
+        <url>https://github.com/ukulkdin/FlinkAPI</url>
+        <tag>HEAD</tag>
+    </scm>
+</project> 

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 부모 프로젝트 참조 -->
+    <parent>
+        <groupId>com.flinkapi</groupId>
+        <artifactId>flink-cep-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <!-- 🔧 Infrastructure 모듈 정의 -->
+    <artifactId>flink-cep-infrastructure</artifactId>
+    <packaging>jar</packaging>
+
+    <name>FlinkAPI CEP Library - Infrastructure</name>
+    <description>인프라 레이어 - 외부 시스템 연동 및 기술적 구현</description>
+
+    <!-- 📦 의존성 -->
+    <dependencies>
+        <!-- 🏛️ Domain 모듈 의존성 -->
+        <dependency>
+            <groupId>com.flinkapi</groupId>
+            <artifactId>flink-cep-domain</artifactId>
+        </dependency>
+
+        <!-- 🎮 Application 모듈 의존성 -->
+        <dependency>
+            <groupId>com.flinkapi</groupId>
+            <artifactId>flink-cep-application</artifactId>
+        </dependency>
+
+        <!-- 🌊 Apache Flink -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java_2.12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-cep_2.12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka_2.12</artifactId>
+        </dependency>
+
+        <!-- 📝 JSON 처리 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- 📊 로깅 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <!-- 🧪 테스트 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- 🔧 빌드 설정 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project> 

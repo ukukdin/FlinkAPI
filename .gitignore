@@ -1,0 +1,31 @@
+# 🚫 빌드 결과물
+target/
+*.jar
+*.war
+*.class
+
+# 🚫 IDE 관련 파일
+.idea/
+*.iml
+.vscode/
+.eclipse/
+
+# 🚫 로그 파일
+*.log
+
+# 🚫 임시 파일
+*.tmp
+*.temp
+*.swp
+*~
+
+# 🚫 OS 관련 파일
+.DS_Store
+Thumbs.db
+
+# 🚫 Web 인터페이스 모듈 (아직 미완성)
+flink-cep-interfaces/
+
+# 🚫 테스트 파일
+ModuleTest.java
+ModuleTest.class 
