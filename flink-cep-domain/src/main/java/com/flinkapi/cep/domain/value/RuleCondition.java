@@ -46,7 +46,7 @@ public class RuleCondition implements Serializable {
         this.logicalOperator = logicalOperator;
     }
 
-    // 🔥 Fluent API - 새로운 인스턴스 생성
+    // Fluent API - 새로운 인스턴스 생성
     public RuleCondition withLogicalOperator(LogicalOperator logicalOperator) {
         return new RuleCondition(this.field, this.operator, this.value, logicalOperator);
     }

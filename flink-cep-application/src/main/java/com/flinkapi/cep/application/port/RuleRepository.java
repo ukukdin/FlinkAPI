@@ -12,52 +12,52 @@ import java.util.Optional;
 public interface RuleRepository {
     
     /**
-     * 🔍 룰 저장
+     * 룰 저장
      */
     Rule save(Rule rule);
     
     /**
-     * 🔍 룰 ID로 조회
+     * 룰 ID로 조회
      */
     Optional<Rule> findById(String ruleId);
     
     /**
-     * 🔍 모든 룰 조회
+     * 모든 룰 조회
      */
     List<Rule> findAll();
     
     /**
-     * 🔍 활성화 상태로 룰 조회
+     * 활성화 상태로 룰 조회
      */
     List<Rule> findByEnabled(boolean enabled);
     
     /**
-     * 🔍 룰 타입으로 조회
+     * 룰 타입으로 조회
      */
     List<Rule> findByRuleType(Rule.RuleType ruleType);
     
     /**
-     * 🔍 심각도로 조회
+     * 심각도로 조회
      */
     List<Rule> findBySeverity(Rule.Severity severity);
     
     /**
-     * 🔍 룰 존재 여부 확인
+     * 룰 존재 여부 확인
      */
     boolean existsById(String ruleId);
     
     /**
-     * 🗑️ 룰 삭제
+     * 룰 삭제
      */
     void deleteById(String ruleId);
     
     /**
-     * 🗑️ 모든 룰 삭제
+     * 모든 룰 삭제
      */
     void deleteAll();
     
     /**
-     * 📊 룰 개수 조회
+     * 룰 개수 조회
      */
     long count();
 } 

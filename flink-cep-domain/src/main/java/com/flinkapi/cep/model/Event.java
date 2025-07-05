@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 🔥 실시간 이벤트 모델 - 모든 이벤트의 기본 구조
+ *  실시간 이벤트 모델 - 모든 이벤트의 기본 구조
  * 바이브 코딩으로 만든 초강력 이벤트 클래스!
  */
 public class Event implements Serializable {
@@ -54,7 +54,7 @@ public class Event implements Serializable {
         this.eventType = eventType;
     }
 
-    // 🚀 Fluent API 스타일 빌더 메서드들
+    // Fluent API 스타일 빌더 메서드들
     public Event withUserId(String userId) {
         this.userId = userId;
         return this;
@@ -95,7 +95,7 @@ public class Event implements Serializable {
         return this;
     }
 
-    // 🔥 바이브한 헬퍼 메서드들
+    // 바이브한 헬퍼 메서드들
     public boolean isHighValueTransaction() {
         return amount != null && amount > 10000.0;
     }

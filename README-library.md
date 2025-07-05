@@ -10,7 +10,7 @@ Apache Flink 기반 복합 이벤트 처리(CEP) 라이브러리입니다. DDD(D
 - **유연한 조건**: 금액, 지역, 디바이스, 시간 등 다양한 조건 지원
 - **간단한 API**: Builder 패턴으로 쉬운 설정
 
-##  Jitpack을 통한 라이브러리 사용
+## Jitpack을 통한 라이브러리 사용
 
 ### Maven 설정
 
@@ -23,7 +23,7 @@ Apache Flink 기반 복합 이벤트 처리(CEP) 라이브러리입니다. DDD(D
 </repositories>
 
 <dependencies>
-    <!--  도메인 모듈만 사용 -->
+    <!-- 도메인 모듈만 사용 -->
     <dependency>
         <groupId>com.github.ukukdin.FlinkAPI</groupId>
         <artifactId>flink-cep-domain</artifactId>
@@ -37,7 +37,7 @@ Apache Flink 기반 복합 이벤트 처리(CEP) 라이브러리입니다. DDD(D
         <version>v1.0.0</version>
     </dependency>
     
-    <!--  인프라 구현체도 사용 -->
+    <!-- 인프라 구현체도 사용 -->
     <dependency>
         <groupId>com.github.ukukdin.FlinkAPI</groupId>
         <artifactId>flink-cep-infrastructure</artifactId>
@@ -54,23 +54,23 @@ repositories {
 }
 
 dependencies {
-    // 🎯 도메인 모듈만 사용
+    // 도메인 모듈만 사용
     implementation 'com.github.ukukdin.FlinkAPI:flink-cep-domain:v1.0.0'
     
-    // 📋 응용 서비스도 사용
+    // 응용 서비스도 사용
     implementation 'com.github.ukukdin.FlinkAPI:flink-cep-application:v1.0.0'
     
-    // 🔧 인프라 구현체도 사용
+    // 인프라 구현체도 사용
     implementation 'com.github.ukukdin.FlinkAPI:flink-cep-infrastructure:v1.0.0'
 }
 ```
 
-## 🎯 사용 시나리오별 모듈 선택
+## 사용 시나리오별 모듈 선택
 
 ### 1. 도메인 모델만 사용하는 경우
 
 ```java
-// 🎯 도메인 모듈만 import
+// 도메인 모듈만 import
 import com.flinkapi.cep.domain.model.Event;
 import com.flinkapi.cep.domain.model.Rule;
 import com.flinkapi.cep.domain.value.RuleCondition;
@@ -88,7 +88,7 @@ if (event.isSuspiciousTransaction()) {
 ### 2. 응용 서비스까지 사용하는 경우
 
 ```java
-//  응용 레이어까지 import
+// 응용 레이어까지 import
 import com.flinkapi.cep.application.service.RuleManagementService;
 import com.flinkapi.cep.application.service.EventStreamingService;
 import com.flinkapi.cep.application.dto.RuleCreateCommand;
@@ -105,7 +105,7 @@ ruleService.createRule(command);
 ### 3. 전체 스택 사용하는 경우
 
 ```java
-//  인프라 구현체까지 모두 import
+// 인프라 구현체까지 모두 import
 import com.flinkapi.cep.engine.RuleEngine;
 import com.flinkapi.cep.infrastructure.streaming.FlinkStreamProcessor;
 
@@ -152,7 +152,7 @@ processor.startProcessing(rules);
 
 이 프로젝트는 MIT 라이선스 하에 있습니다.
 
-##  링크
+## 링크
 
 - **GitHub**: https://github.com/ukukdin/FlinkAPI
 - **Jitpack**: https://jitpack.io/#ukukdin/FlinkAPI
@@ -180,4 +180,4 @@ mvn archetype:generate -DgroupId=com.example -DartifactId=my-cep-app
 mvn clean compile exec:java
 ```
 
- **축하합니다!** 이제 FlinkAPI CEP 라이브러리를 사용할 준비가 되었습니다! 
+**축하합니다!** 이제 FlinkAPI CEP 라이브러리를 사용할 준비가 되었습니다! 

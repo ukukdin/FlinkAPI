@@ -23,7 +23,7 @@ public class CEPLibraryExample {
 
     public static void main(String[] args) throws Exception {
         
-        System.out.println("🚀 Flink CEP Library Example 시작");
+        System.out.println("Flink CEP Library Example 시작");
         
         // 1. Flink 실행 환경 설정
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -33,14 +33,14 @@ public class CEPLibraryExample {
         FlinkCEPLibrary cepLib = FlinkCEPLibrary.builder()
             .withExecutionEnvironment(env)
             .withAlertHandler(alert -> {
-                System.out.println("🚨 PATTERN DETECTED:");
+                System.out.println("PATTERN DETECTED:");
                 System.out.println(alert);
                 System.out.println("=" .repeat(50));
             })
             .build();
         
         // 3. 자연어 룰 등록
-        System.out.println("📝 자연어 룰 등록 중...");
+        System.out.println("자연어 룰 등록 중...");
         
         // 시퀀스 패턴 룰들
         cepLib.addRule("한국에서 거래 이후 중국에서 로그인", "해외_로그인_패턴");
@@ -53,7 +53,7 @@ public class CEPLibraryExample {
         cepLib.addRule("모바일에서 50만원 이상 거래 5분에 3회 이상", "빈발_모바일거래");
         
         // 4. 직접 Rule 객체 생성 예시
-        System.out.println("🔧 커스텀 룰 생성 중...");
+        System.out.println("커스텀 룰 생성 중...");
         
         Rule customRule = new Rule("custom-001", "VIP고객_특별관리", Rule.RuleType.SINGLE_EVENT)
             .withConditions(Arrays.asList(
@@ -68,18 +68,18 @@ public class CEPLibraryExample {
         cepLib.addRule(customRule);
         
         // 5. 등록된 룰 확인
-        System.out.println("📊 등록된 룰 목록:");
+        System.out.println("등록된 룰 목록:");
         cepLib.getAllRules().forEach(rule -> 
             System.out.println("  - " + rule.getRuleName() + " (" + rule.getRuleType() + ")")
         );
         
         // 6. 테스트 이벤트 스트림 생성
-        System.out.println("🌊 테스트 이벤트 스트림 생성 중...");
+        System.out.println("테스트 이벤트 스트림 생성 중...");
         
         DataStream<Event> eventStream = env.addSource(new TestEventSource());
         
         // 7. CEP 패턴 적용
-        System.out.println("🔍 패턴 탐지 시작...");
+        System.out.println("패턴 탐지 시작...");
         cepLib.processEvents(eventStream);
         
         // 8. Flink 작업 실행
@@ -152,7 +152,7 @@ public class CEPLibraryExample {
                 Thread.sleep(2000); // 2초마다 이벤트 생성
             }
             
-            System.out.println("✅ 이벤트 생성 완료. 총 " + eventCount + "개 이벤트 생성됨");
+            System.out.println("이벤트 생성 완료. 총 " + eventCount + "개 이벤트 생성됨");
         }
         
         @Override

@@ -1,11 +1,11 @@
-# 🚀 FlinkAPI - DDD 구조로 설계된 실시간 CEP 라이브러리
+# FlinkAPI - DDD 구조로 설계된 실시간 CEP 라이브러리
 
 ## 📖 개요
 
 FlinkAPI는 **Domain-Driven Design (DDD)** 패턴을 적용하여 설계된 Apache Flink 기반의 실시간 Complex Event Processing (CEP) 라이브러리입니다. 
 이 라이브러리는 다른 개발자들이 쉽게 사용할 수 있도록 모듈화되고 확장 가능한 구조로 설계되었습니다.
 
-## 🏗️ DDD 아키텍처 구조
+## DDD 아키텍처 구조
 
 ```
 com.flinkapi.cep

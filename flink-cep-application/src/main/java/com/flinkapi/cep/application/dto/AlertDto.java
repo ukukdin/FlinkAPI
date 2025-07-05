@@ -3,8 +3,8 @@ package com.flinkapi.cep.application.dto;
 import com.flinkapi.cep.domain.model.Rule;
 
 /**
- * 📦 알림 데이터 전송 객체 - 알림 정보를 외부로 전달하는 DTO
- * DDD 패턴으로 설계된 DTO
+ *  알림 데이터 전송 객체 - 알림 정보를 외부로 전달하는 DTO
+ * 
  */
 public class AlertDto {
     

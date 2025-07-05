@@ -21,7 +21,7 @@ public class RuleValidationService {
      * 룰 전체 검증
      */
     public ValidationResult validateRule(Rule rule) {
-        logger.debug("🔍 Validating rule: {}", rule.getRuleId());
+        logger.debug("Validating rule: {}", rule.getRuleId());
         
         List<String> errors = new ArrayList<>();
         

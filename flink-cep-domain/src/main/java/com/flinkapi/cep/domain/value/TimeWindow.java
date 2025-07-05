@@ -33,7 +33,7 @@ public class TimeWindow implements Serializable {
         this.unit = unit;
     }
 
-    // 🔥 비즈니스 로직 메서드들
+    // 비즈니스 로직 메서드들
     public long toMilliseconds() {
         return duration * unit.getMilliseconds();
     }
@@ -62,7 +62,7 @@ public class TimeWindow implements Serializable {
         return toHours() >= 1;
     }
 
-    // 🚀 팩토리 메서드들
+    // 팩토리 메서드들
     public static TimeWindow ofMilliseconds(long duration) {
         return new TimeWindow(duration, TimeUnit.MILLISECONDS);
     }

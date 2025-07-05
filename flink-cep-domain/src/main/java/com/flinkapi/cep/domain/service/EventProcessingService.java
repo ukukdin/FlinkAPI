@@ -26,7 +26,7 @@ public class EventProcessingService {
      * 이벤트 전처리
      */
     public ProcessingResult preprocessEvent(Event event) {
-        logger.debug("🚀 Preprocessing event: {}", event.getEventId());
+        logger.debug("Preprocessing event: {}", event.getEventId());
         
         List<String> issues = new ArrayList<>();
         
@@ -47,7 +47,7 @@ public class EventProcessingService {
     }
 
     /**
-     * 🔧 이벤트 정규화
+     * 이벤트 정규화
      */
     private Event normalizeEvent(Event event) {
         Event normalized = new Event(event.getEventId(), event.getEventType());
@@ -138,7 +138,7 @@ public class EventProcessingService {
      *  이벤트 이상 탐지
      */
     public AnomalyDetectionResult detectAnomalies(Event event) {
-        logger.debug("🔍 Detecting anomalies for event: {}", event.getEventId());
+        logger.debug("Detecting anomalies for event: {}", event.getEventId());
         
         List<String> anomalies = new ArrayList<>();
         
@@ -168,7 +168,7 @@ public class EventProcessingService {
             calculateAnomalyScore(anomalies)
         );
         
-        logger.debug("🔍 Anomaly detection result: {}", result);
+        logger.debug("Anomaly detection result: {}", result);
         return result;
     }
 

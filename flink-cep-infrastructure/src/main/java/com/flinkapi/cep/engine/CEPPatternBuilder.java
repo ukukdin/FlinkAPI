@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 🚀 CEP 패턴 빌더 - 바이브 코딩으로 만든 초강력 패턴 생성기!
+ * CEP 패턴 빌더 - 바이브 코딩으로 만든 초강력 패턴 생성기!
  * Rule 객체를 받아서 실시간 Flink CEP Pattern으로 변환합니다.
  */
 public class CEPPatternBuilder {
@@ -23,10 +23,10 @@ public class CEPPatternBuilder {
     private static final Logger logger = LoggerFactory.getLogger(CEPPatternBuilder.class);
     
     /**
-     * 🔥 룰을 기반으로 CEP 패턴을 동적 생성!
+     * 룰을 기반으로 CEP 패턴을 동적 생성!
      */
     public static Pattern<Event, ?> buildPattern(Rule rule) {
-        logger.info("🚀 Building CEP pattern for rule: {}", rule.getRuleName());
+        logger.info("Building CEP pattern for rule: {}", rule.getRuleName());
         
         switch (rule.getRuleType()) {
             case SINGLE_EVENT:
@@ -45,10 +45,10 @@ public class CEPPatternBuilder {
     }
     
     /**
-     * 🎯 단일 이벤트 패턴 - 하나의 이벤트가 조건을 만족하면 발생
+     * 단일 이벤트 패턴 - 하나의 이벤트가 조건을 만족하면 발생
      */
     private static Pattern<Event, ?> buildSingleEventPattern(Rule rule) {
-        logger.info("🎯 Building single event pattern...");
+        logger.info("Building single event pattern...");
         
         Pattern<Event, ?> pattern = Pattern.<Event>begin("alert")
                 .where(new ConditionBuilder(rule.getConditions()).build());
@@ -62,15 +62,15 @@ public class CEPPatternBuilder {
     }
     
     /**
-     * 🔗 시퀀스 패턴 - 여러 이벤트가 순차적으로 발생 (동적 생성)
+     * 시퀀스 패턴 - 여러 이벤트가 순차적으로 발생 (동적 생성)
      */
     private static Pattern<Event, ?> buildSequencePattern(Rule rule) {
-        logger.info("🔗 Building sequence pattern with {} steps...", 
+        logger.info("Building sequence pattern with {} steps...", 
                    rule.getSequenceSteps() != null ? rule.getSequenceSteps().size() : 0);
         
         // sequenceSteps가 없으면 기본 단일 이벤트 패턴으로 처리
         if (rule.getSequenceSteps() == null || rule.getSequenceSteps().isEmpty()) {
-            logger.warn("⚠️ No sequence steps found, falling back to single event pattern");
+            logger.warn("No sequence steps found, falling back to single event pattern");
             return buildSingleEventPattern(rule);
         }
         
@@ -79,7 +79,7 @@ public class CEPPatternBuilder {
         
         // 첫 번째 단계
         Rule.SequenceStep firstStep = steps.get(0);
-        logger.info("🚀 Creating first step: {} ({})", firstStep.getStepName(), firstStep.getEventType());
+        logger.info("Creating first step: {} ({})", firstStep.getStepName(), firstStep.getEventType());
         
         pattern = Pattern.<Event>begin(firstStep.getStepName())
                 .where(new ConditionBuilder(firstStep.getConditions()).build());
@@ -87,7 +87,7 @@ public class CEPPatternBuilder {
         // 나머지 단계들을 순차적으로 연결
         for (int i = 1; i < steps.size(); i++) {
             Rule.SequenceStep step = steps.get(i);
-            logger.info("🔗 Adding step {}: {} ({})", i + 1, step.getStepName(), step.getEventType());
+            logger.info("Adding step {}: {} ({})", i + 1, step.getStepName(), step.getEventType());
             
             if (step.isOptional()) {
                 // 선택적 단계 (followedByAny 사용)
@@ -104,23 +104,23 @@ public class CEPPatternBuilder {
         // 전체 시퀀스에 시간 윈도우 적용
         if (rule.getTimeWindow() != null) {
             long timeWindowMs = rule.getTimeWindow().toMilliseconds();
-            logger.info("⏰ Applying time window: {} ms", timeWindowMs);
+            logger.info("Applying time window: {} ms", timeWindowMs);
             pattern = pattern.within(Time.milliseconds(timeWindowMs));
         } else {
             // 기본 30분 윈도우 설정
-            logger.info("⏰ Applying default 30-minute window");
+            logger.info("Applying default 30-minute window");
             pattern = pattern.within(Time.minutes(30));
         }
         
-        logger.info("✅ Sequence pattern built successfully with {} steps", steps.size());
+        logger.info("Sequence pattern built successfully with {} steps", steps.size());
         return pattern;
     }
     
     /**
-     * 📊 임계값 패턴 - 특정 값이 임계값을 초과했을 때
+     * 임계값 패턴 - 특정 값이 임계값을 초과했을 때
      */
     private static Pattern<Event, ?> buildThresholdPattern(Rule rule) {
-        logger.info("📊 Building threshold pattern...");
+        logger.info("Building threshold pattern...");
         
         Pattern<Event, ?> pattern = Pattern.<Event>begin("threshold")
                 .where(new ConditionBuilder(rule.getConditions()).build());
@@ -134,10 +134,10 @@ public class CEPPatternBuilder {
     }
     
     /**
-     * 🔄 빈도 패턴 - 특정 시간 내에 N번 이상 발생
+     * 빈도 패턴 - 특정 시간 내에 N번 이상 발생
      */
     private static Pattern<Event, ?> buildFrequencyPattern(Rule rule) {
-        logger.info("🔄 Building frequency pattern...");
+        logger.info("Building frequency pattern...");
         
         // 기본적으로 5분 내에 3번 이상 발생
         int times = 3;
@@ -156,10 +156,10 @@ public class CEPPatternBuilder {
     }
     
     /**
-     * 🚨 이상 탐지 패턴 - 일반적이지 않은 패턴 감지
+     * 이상 탐지 패턴 - 일반적이지 않은 패턴 감지
      */
     private static Pattern<Event, ?> buildAnomalyPattern(Rule rule) {
-        logger.info("🚨 Building anomaly detection pattern...");
+        logger.info("Building anomaly detection pattern...");
         
         // 예: 짧은 시간 내에 다른 지역에서의 접근
         Pattern<Event, ?> pattern = Pattern.<Event>begin("first_location")
@@ -178,7 +178,7 @@ public class CEPPatternBuilder {
     }
     
     /**
-     * 🏗️ 조건 빌더 - 동적으로 조건들을 결합
+     * 조건 빌더 - 동적으로 조건들을 결합
      */
     public static class ConditionBuilder implements java.io.Serializable {
         private static final long serialVersionUID = 1L;
@@ -194,7 +194,7 @@ public class CEPPatternBuilder {
     }
     
     /**
-     * 🎯 직렬화 가능한 룰 조건 클래스
+     * 직렬화 가능한 룰 조건 클래스
      */
     public static class RuleCondition extends SimpleCondition<Event> {
         private static final long serialVersionUID = 1L;
@@ -237,14 +237,14 @@ public class CEPPatternBuilder {
         }
         
         /**
-         * 🎯 단일 조건 평가 - 리플렉션을 사용한 동적 필드 접근
+         * 단일 조건 평가 - 리플렉션을 사용한 동적 필드 접근
          */
         private boolean evaluateCondition(Event event, Rule.Condition condition) {
             try {
                 Object fieldValue = getFieldValue(event, condition.getField());
                 Object conditionValue = condition.getValue();
                 
-                logger.debug("🔍 Evaluating: {} {} {} (actual: {})", 
+                logger.debug("Evaluating: {} {} {} (actual: {})", 
                     condition.getField(), condition.getOperator(), conditionValue, fieldValue);
                 
                 switch (condition.getOperator()) {
@@ -273,17 +273,17 @@ public class CEPPatternBuilder {
                         return !(conditionValue instanceof Collection && 
                                 ((Collection<?>) conditionValue).contains(fieldValue));
                     default:
-                        logger.warn("⚠️ 지원하지 않는 연산자: {}", condition.getOperator());
+                        logger.warn("지원하지 않는 연산자: {}", condition.getOperator());
                         return false;
                 }
             } catch (Exception e) {
-                logger.error("❌ 조건 평가 중 오류 발생: {}", e.getMessage(), e);
+                logger.error("조건 평가 중 오류 발생: {}", e.getMessage(), e);
                 return false;
             }
         }
         
         /**
-         * 🔍 리플렉션을 사용한 필드 값 추출
+         * 리플렉션을 사용한 필드 값 추출
          */
         private Object getFieldValue(Event event, String fieldName) throws Exception {
             // 먼저 직접 메서드 호출 시도
@@ -315,7 +315,7 @@ public class CEPPatternBuilder {
         }
         
         /**
-         * 🔢 숫자 비교
+         * 숫자 비교
          */
         private int compareNumbers(Object value1, Object value2) {
             if (value1 == null || value2 == null) {
@@ -329,7 +329,7 @@ public class CEPPatternBuilder {
         }
         
         /**
-         * 🎯 값 동등성 비교
+         * 값 동등성 비교
          */
         private boolean equals(Object value1, Object value2) {
             if (value1 == null && value2 == null) return true;

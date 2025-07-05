@@ -15,7 +15,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * 🧪 룰 엔진 테스트 - 바이브 코딩으로 만든 테스트!
+ * 룰 엔진 테스트 - 바이브 코딩으로 만든 테스트!
  */
 public class RuleEngineTest {
     

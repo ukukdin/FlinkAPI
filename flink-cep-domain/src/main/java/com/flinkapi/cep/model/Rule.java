@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 🎯 실시간 룰 정의 클래스
+ * 실시간 룰 정의 클래스
  * 바이브 코딩으로 만든 강력한 룰 시스템!
  */
 public class Rule implements Serializable {
@@ -55,7 +55,7 @@ public class Rule implements Serializable {
         this.ruleType = ruleType;
     }
 
-    // 🚀 Fluent API 스타일 빌더 메서드들
+    // Fluent API 스타일 빌더 메서드들
     public Rule withConditions(List<Condition> conditions) {
         this.conditions = conditions;
         return this;

@@ -1,4 +1,4 @@
-# 🏗️ FlinkAPI CEP - Maven 멀티모듈 구조 가이드
+# FlinkAPI CEP - Maven 멀티모듈 구조 가이드
 
 ## 📋 개요
 

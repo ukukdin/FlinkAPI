@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 🧠 자연어 룰 파서 서비스 (라이브러리 버전)
+ * 자연어 룰 파서 서비스 (라이브러리 버전)
  * 사용자가 입력한 텍스트를 Rule 객체로 변환해주는 똑똑한 파서!
  */
 public class RuleParserService {
@@ -24,7 +24,7 @@ public class RuleParserService {
      */
     public Rule parseRule(String ruleText, String ruleName) {
         try {
-            System.out.println("📝 Parsing rule text: " + ruleText);
+            System.out.println("Parsing rule text: " + ruleText);
             
             // 룰 ID 생성
             String ruleId = "rule-" + System.currentTimeMillis();
@@ -34,7 +34,7 @@ public class RuleParserService {
             
             // 시퀀스 패턴 체크 (이후, 후, 다음에 등의 키워드)
             if (isSequencePattern(normalizedText)) {
-                System.out.println("🔗 Detected sequence pattern, parsing as SEQUENCE rule");
+                System.out.println("Detected sequence pattern, parsing as SEQUENCE rule");
                 return parseSequenceRule(ruleId, ruleName, normalizedText);
             }
             
@@ -42,7 +42,7 @@ public class RuleParserService {
             return parseSingleEventRule(ruleId, ruleName, normalizedText);
             
         } catch (Exception e) {
-            System.err.println("❌ Error parsing rule: " + e.getMessage());
+            System.err.println("Error parsing rule: " + e.getMessage());
             return createDefaultRule(ruleText, ruleName);
         }
     }
@@ -59,7 +59,7 @@ public class RuleParserService {
      * 시퀀스 룰 파싱
      */
     private Rule parseSequenceRule(String ruleId, String ruleName, String text) {
-        System.out.println("🔗 Parsing sequence rule from: " + text);
+        System.out.println("Parsing sequence rule from: " + text);
         
         List<Rule.SequenceStep> sequenceSteps = new ArrayList<>();
         Rule.Severity severity = determineSeverity(text);
@@ -71,7 +71,7 @@ public class RuleParserService {
             String stepText = parts[i].trim();
             if (stepText.isEmpty()) continue;
             
-            System.out.println("📋 Parsing step " + (i + 1) + ": " + stepText);
+            System.out.println("Parsing step " + (i + 1) + ": " + stepText);
             
             String stepName = "step_" + (i + 1);
             String eventType = detectEventType(stepText);
@@ -97,7 +97,7 @@ public class RuleParserService {
                     .withConditions(stepConditions);
             
             sequenceSteps.add(step);
-            System.out.println("✅ Added sequence step: " + step.toString());
+            System.out.println("Added sequence step: " + step.toString());
         }
         
         // 전체 시간 윈도우 파싱 (전체 시퀀스에 적용)
@@ -112,7 +112,7 @@ public class RuleParserService {
             rule = rule.withTimeWindow(timeWindow);
         }
         
-        System.out.println("✅ Successfully parsed sequence rule with " + sequenceSteps.size() + " steps");
+        System.out.println(" Successfully parsed sequence rule with " + sequenceSteps.size() + " steps");
         
         return rule;
     }
@@ -162,7 +162,7 @@ public class RuleParserService {
             rule = rule.withFrequencyCount(frequencyCount);
         }
         
-        System.out.println("✅ Successfully parsed single event rule: " + rule.getRuleName());
+        System.out.println("Successfully parsed single event rule: " + rule.getRuleName());
         return rule;
     }
 
@@ -183,7 +183,7 @@ public class RuleParserService {
         for (String region : regions) {
             if (text.contains(region)) {
                 conditions.add(new Rule.Condition("region", Rule.Operator.EQUALS, region));
-                System.out.println("✅ Found region condition: " + region);
+                System.out.println(" Found region condition: " + region);
                 break;
             }
         }
@@ -209,26 +209,26 @@ public class RuleParserService {
             }
             
             conditions.add(new Rule.Condition("amount", op, amount));
-            System.out.println("✅ Found amount condition: " + amount + " " + op);
+            System.out.println(" Found amount condition: " + amount + " " + op);
         } else {
-            System.out.println("❌ No amount condition found");
+            System.out.println(" No amount condition found");
         }
     }
 
     private void parseDeviceCondition(String text, List<Rule.Condition> conditions) {
         if (text.contains("모바일") || text.contains("핸드폰") || text.contains("스마트폰")) {
             conditions.add(new Rule.Condition("deviceType", Rule.Operator.EQUALS, "MOBILE"));
-            System.out.println("✅ Found device condition: MOBILE");
+            System.out.println(" Found device condition: MOBILE");
         } else if (text.contains("데스크탑") || text.contains("pc") || text.contains("컴퓨터")||text.contains("노트북")) {
             conditions.add(new Rule.Condition("deviceType", Rule.Operator.EQUALS, "DESKTOP"));
-            System.out.println("✅ Found device condition: DESKTOP");
+            System.out.println("Found device condition: DESKTOP");
         }
     }
 
     private void parseNewDeviceCondition(String text, List<Rule.Condition> conditions) {
         if (text.contains("신규") && (text.contains("기기") || text.contains("디바이스") || text.contains("장치")) || text.contains("신규기기")) {
             conditions.add(new Rule.Condition("isNewDevice", Rule.Operator.EQUALS, true));
-            System.out.println("✅ Found new device condition");
+            System.out.println("Found new device condition");
         }
     }
 
@@ -236,7 +236,7 @@ public class RuleParserService {
         String eventType = detectEventType(text);
         if (eventType != null) {
             conditions.add(new Rule.Condition("eventType", Rule.Operator.EQUALS, eventType));
-            System.out.println("✅ Found event type condition: " + eventType);
+            System.out.println("Found event type condition: " + eventType);
         }
     }
 
@@ -258,41 +258,41 @@ public class RuleParserService {
             }
             
             conditions.add(new Rule.Condition("age", op, age));
-            System.out.println("✅ Found age condition: " + age + " " + op);
+            System.out.println("Found age condition: " + age + " " + op);
         }
     }
 
     private void parseGenderCondition(String text, List<Rule.Condition> conditions) {
         if (text.contains("남자") || text.contains("남성")) {
             conditions.add(new Rule.Condition("gender", Rule.Operator.EQUALS, "MALE"));
-            System.out.println("✅ Found gender condition: MALE");
+            System.out.println("Found gender condition: MALE");
         } else if (text.contains("여자") || text.contains("여성")) {
             conditions.add(new Rule.Condition("gender", Rule.Operator.EQUALS, "FEMALE"));
-            System.out.println("✅ Found gender condition: FEMALE");
+            System.out.println("Found gender condition: FEMALE");
         }
     }
 
     private void parseTimeRangeCondition(String text, List<Rule.Condition> conditions) {
         if (text.contains("새벽") || text.contains("밤") || text.contains("야간")) {
             conditions.add(new Rule.Condition("timeRange", Rule.Operator.EQUALS, "NIGHT"));
-            System.out.println("✅ Found time range condition: NIGHT");
+            System.out.println("Found time range condition: NIGHT");
         } else if (text.contains("휴일") || text.contains("주말")) {
             conditions.add(new Rule.Condition("isHoliday", Rule.Operator.EQUALS, true));
-            System.out.println("✅ Found holiday condition");
+            System.out.println("Found holiday condition");
         }
     }
 
     private void parseAccountTypeCondition(String text, List<Rule.Condition> conditions) {
         if (text.contains("신규") && text.contains("계좌")) {
             conditions.add(new Rule.Condition("isNewAccount", Rule.Operator.EQUALS, true));
-            System.out.println("✅ Found new account condition");
+            System.out.println("Found new account condition");
         }
     }
 
     private void parseJobCondition(String text, List<Rule.Condition> conditions) {
         if (text.contains("무직자") || text.contains("무직")) {
             conditions.add(new Rule.Condition("job", Rule.Operator.EQUALS, "UNEMPLOYED"));
-            System.out.println("✅ Found job condition: UNEMPLOYED");
+            System.out.println("Found job condition: UNEMPLOYED");
         }
     }
 
@@ -312,11 +312,11 @@ public class RuleParserService {
                 default: timeUnit = Rule.TimeUnit.MINUTES;
             }
             
-            System.out.println("✅ Found time window: " + value + " " + timeUnit);
+            System.out.println("Found time window: " + value + " " + timeUnit);
             return new Rule.TimeWindow(value, timeUnit);
         }
         
-        System.out.println("❌ No time window found");
+        System.out.println("No time window found");
         return null;
     }
 
@@ -326,11 +326,11 @@ public class RuleParserService {
         
         if (matcher.find()) {
             int count = Integer.parseInt(matcher.group(1));
-            System.out.println("✅ Found frequency count: " + count);
+            System.out.println("Found frequency count: " + count);
             return count;
         }
         
-        System.out.println("❌ No frequency count found");
+        System.out.println("No frequency count found");
         return null;
     }
 

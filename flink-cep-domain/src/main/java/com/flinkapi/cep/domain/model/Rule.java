@@ -97,7 +97,7 @@ public class Rule implements Serializable {
         return this;
     }
 
-    // 🔥 도메인 비즈니스 로직 메서드들
+    // 도메인 비즈니스 로직 메서드들
     public boolean canApplyToEvent(Event event) {
         if (!enabled) return false;
         if (conditions == null || conditions.isEmpty()) return false;
