@@ -20,7 +20,7 @@
         <module>flink-cep-domain</module>
         <module>flink-cep-application</module>
         <module>flink-cep-infrastructure</module>
-        <!-- <module>flink-cep-interfaces</module> --> <!-- 별도 배포 예정 -->
+        <!-- <module>flink-cep-interfaces</module> --> <!-- 별도 수정 필요 -->
         <module>flink-cep-starter</module>
     </modules>
 
@@ -67,13 +67,11 @@
                 <artifactId>flink-cep-infrastructure</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- 
             <dependency>
                 <groupId>com.flinkapi</groupId>
                 <artifactId>flink-cep-interfaces</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            --> <!-- 별도 배포 예정 -->
 
             <!-- 🌊 Apache Flink -->
             <dependency>

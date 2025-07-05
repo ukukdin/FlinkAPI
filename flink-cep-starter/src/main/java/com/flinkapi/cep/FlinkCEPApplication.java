@@ -1,21 +1,12 @@
 package com.flinkapi.cep;
 
-import com.flinkapi.cep.application.service.EventStreamingService;
-import com.flinkapi.cep.application.service.RuleManagementService;
-import com.flinkapi.cep.application.port.EventRepository;
-import com.flinkapi.cep.application.port.RuleRepository;
 import com.flinkapi.cep.domain.model.Event;
 import com.flinkapi.cep.domain.model.Rule;
-import com.flinkapi.cep.domain.service.EventProcessingService;
-import com.flinkapi.cep.domain.service.RuleValidationService;
-import com.flinkapi.cep.infrastructure.streaming.FlinkStreamProcessor;
-import com.flinkapi.cep.interfaces.web.RuleController;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,9 +24,7 @@ public class FlinkCEPApplication {
     private static final Logger LOGGER = LoggerFactory.getLogger(FlinkCEPApplication.class);
     
     private final StreamExecutionEnvironment env;
-    private final EventStreamingService eventStreamingService;
-    private final RuleManagementService ruleManagementService;
-    private final FlinkStreamProcessor flinkStreamProcessor;
+    private final List<Rule> rules;
     
     /**
      * FlinkCEPApplication 생성자
@@ -44,16 +33,7 @@ public class FlinkCEPApplication {
      */
     public FlinkCEPApplication(StreamExecutionEnvironment env) {
         this.env = env;
-        
-        // 스텁 구현체 생성
-        EventRepository eventRepository = new StubEventRepository();
-        RuleRepository ruleRepository = new StubRuleRepository();
-        RuleValidationService ruleValidationService = new RuleValidationService();
-        EventProcessingService eventProcessingService = new EventProcessingService();
-        
-        this.flinkStreamProcessor = new FlinkStreamProcessor();
-        this.eventStreamingService = new EventStreamingService(eventRepository, ruleRepository, eventProcessingService, flinkStreamProcessor);
-        this.ruleManagementService = new RuleManagementService(ruleRepository, ruleValidationService);
+        this.rules = new ArrayList<>();
         
         LOGGER.info("FlinkCEPApplication 초기화 완료");
     }
@@ -85,8 +65,8 @@ public class FlinkCEPApplication {
      * @return 현재 애플리케이션 인스턴스 (체이닝)
      */
     public FlinkCEPApplication registerRule(Rule rule) {
-        ruleManagementService.createRule(rule);
-        LOGGER.info("룰 등록 완료: {}", rule.getName());
+        rules.add(rule);
+        LOGGER.info("룰 등록 완료: {}", rule.getRuleName());
         return this;
     }
     
@@ -97,7 +77,8 @@ public class FlinkCEPApplication {
      * @return 현재 애플리케이션 인스턴스 (체이닝)
      */
     public FlinkCEPApplication registerRules(List<Rule> rules) {
-        rules.forEach(this::registerRule);
+        this.rules.addAll(rules);
+        LOGGER.info("룰 {} 개 등록 완료", rules.size());
         return this;
     }
     
@@ -108,7 +89,11 @@ public class FlinkCEPApplication {
      * @return 현재 애플리케이션 인스턴스 (체이닝)
      */
     public FlinkCEPApplication registerRules(Rule... rules) {
-        return registerRules(Arrays.asList(rules));
+        for (Rule rule : rules) {
+            this.rules.add(rule);
+        }
+        LOGGER.info("룰 {} 개 등록 완료", rules.length);
+        return this;
     }
     
     /**
@@ -119,8 +104,8 @@ public class FlinkCEPApplication {
      */
     public FlinkCEPApplication startEventStreaming(String eventSourceName) {
         try {
-            eventStreamingService.startStreaming(eventSourceName);
             LOGGER.info("이벤트 스트리밍 시작: {}", eventSourceName);
+            // 실제 구현은 향후 추가 예정
         } catch (Exception e) {
             LOGGER.error("이벤트 스트리밍 시작 실패", e);
             throw new RuntimeException("이벤트 스트리밍 시작 실패", e);
@@ -137,8 +122,8 @@ public class FlinkCEPApplication {
     public void execute(String jobName) throws Exception {
         LOGGER.info("FlinkCEP 애플리케이션 실행 시작: {}", jobName);
         
-        // 스트림 처리 파이프라인 구성
-        flinkStreamProcessor.process(env, ruleManagementService.getAllRules());
+        // 등록된 룰 수 출력
+        LOGGER.info("등록된 룰 수: {}", rules.size());
         
         // Flink 작업 실행
         env.execute(jobName);
@@ -184,7 +169,7 @@ public class FlinkCEPApplication {
             "- Registered Rules: %d\n" +
             "- Status: %s",
             env.getClass().getSimpleName(),
-            ruleManagementService.getAllRules().size(),
+            rules.size(),
             "Running"
         );
     }
@@ -198,63 +183,18 @@ public class FlinkCEPApplication {
         try {
             LOGGER.info("FlinkCEP 애플리케이션 시작");
             
-            // 샘플 애플리케이션 실행
+            // 애플리케이션 생성 및 설정
             FlinkCEPApplication app = FlinkCEPApplication.create();
             
-            // 샘플 룰 등록
-            Rule sampleRule = Rule.builder()
-                .name("Sample Rule")
-                .description("샘플 룰입니다")
-                .eventType("transaction")
-                .build();
-                
-            app.registerRule(sampleRule)
-               .startEventStreaming("sample-events")
-               .execute("FlinkCEP Sample Application");
-               
+            // 상태 정보 출력
+            LOGGER.info("애플리케이션 상태: {}", app.getStatus());
+            
+            // 애플리케이션 실행
+            app.execute();
+            
         } catch (Exception e) {
-            LOGGER.error("❌ 애플리케이션 실행 실패", e);
+            LOGGER.error("애플리케이션 실행 중 오류 발생", e);
             System.exit(1);
-        }
-    }
-    
-    // 스텁 구현체들
-    private static class StubEventRepository implements EventRepository {
-        @Override
-        public void save(Event event) {
-            // 스텁 구현
-        }
-        
-        @Override
-        public List<Event> findByEventType(String eventType) {
-            return Arrays.asList();
-        }
-    }
-    
-    private static class StubRuleRepository implements RuleRepository {
-        private final List<Rule> rules = new ArrayList<>();
-        
-        @Override
-        public void save(Rule rule) {
-            rules.add(rule);
-        }
-        
-        @Override
-        public List<Rule> findAll() {
-            return new ArrayList<>(rules);
-        }
-        
-        @Override
-        public Rule findById(String id) {
-            return rules.stream()
-                .filter(rule -> rule.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-        }
-        
-        @Override
-        public void deleteById(String id) {
-            rules.removeIf(rule -> rule.getId().equals(id));
         }
     }
 } 

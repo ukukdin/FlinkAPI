@@ -35,8 +35,10 @@
             <artifactId>flink-cep-infrastructure</artifactId>
         </dependency>
 
-       
-        <!-- interfaces 모듈은 별도 배포 예정으로 제외 -->
+        <!-- <dependency>
+            <groupId>com.flinkapi</groupId>
+            <artifactId>flink-cep-interfaces</artifactId>
+        </dependency> --> <!-- 별도 수정 필요 -->
 
         <!-- 🌊 Apache Flink (런타임용) -->
         <dependency>

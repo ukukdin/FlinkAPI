@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flinkapi.cep.engine.RuleEngine;
 import com.flinkapi.cep.model.Event;
 import com.flinkapi.cep.model.Rule;
-import com.flinkapi.cep.web.controller.RuleController;
+// import com.flinkapi.cep.web.controller.RuleController; // 별도 수정 필요
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
@@ -42,8 +42,8 @@ public class RealtimeRuleApp {
         RuleEngine ruleEngine = new RuleEngine();
         
         // 웹 컨트롤러와 연결 (동적 룰 등록 가능)
-        RuleController.setGlobalRuleEngine(ruleEngine);
-        logger.info("Connected web controller to Flink engine for dynamic rule registration!");
+        // RuleController.setGlobalRuleEngine(ruleEngine); // 별도 수정 필요
+        logger.info("Web controller connection disabled - interfaces module not available");
         
         // 바이브한 룰들을 등록!
         registerAwesomeRules(ruleEngine);
