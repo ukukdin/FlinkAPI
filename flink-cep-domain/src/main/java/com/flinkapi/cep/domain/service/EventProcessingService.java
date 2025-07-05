@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 🚀 이벤트 처리 도메인 서비스 - 이벤트 처리 로직을 담당하는 핵심 도메인 서비스
- * DDD 패턴으로 설계된 도메인 서비스
+ * 이벤트 처리 도메인 서비스 - 이벤트 처리 로직을 담당하는 핵심 도메인 서비스
+ *
  */
 public class EventProcessingService {
     
@@ -23,7 +23,7 @@ public class EventProcessingService {
     private final Map<String, EventStats> eventStats = new ConcurrentHashMap<>();
 
     /**
-     * 🎯 이벤트 전처리
+     * 이벤트 전처리
      */
     public ProcessingResult preprocessEvent(Event event) {
         logger.debug("🚀 Preprocessing event: {}", event.getEventId());
@@ -42,7 +42,7 @@ public class EventProcessingService {
         // 이벤트 통계 업데이트
         updateEventStats(normalizedEvent);
         
-        logger.debug("✅ Event preprocessing completed: {}", normalizedEvent.getEventId());
+        logger.debug("Event preprocessing completed: {}", normalizedEvent.getEventId());
         return new ProcessingResult(true, normalizedEvent, issues);
     }
 
@@ -99,7 +99,7 @@ public class EventProcessingService {
     }
 
     /**
-     * 📊 이벤트 통계 업데이트
+     * 이벤트 통계 업데이트
      */
     private void updateEventStats(Event event) {
         String key = event.getEventType() + "_" + event.getRegion();
@@ -120,7 +120,7 @@ public class EventProcessingService {
     }
 
     /**
-     * 🎯 이벤트와 룰 매칭
+     *  이벤트와 룰 매칭
      */
     public boolean doesEventMatchRule(Event event, Rule rule) {
         if (event == null || rule == null) {
@@ -135,7 +135,7 @@ public class EventProcessingService {
     }
 
     /**
-     * 🔍 이벤트 이상 탐지
+     *  이벤트 이상 탐지
      */
     public AnomalyDetectionResult detectAnomalies(Event event) {
         logger.debug("🔍 Detecting anomalies for event: {}", event.getEventId());
@@ -173,7 +173,7 @@ public class EventProcessingService {
     }
 
     /**
-     * 🕐 비정상 시간대 체크
+     *  비정상 시간대 체크
      */
     private boolean isOffHoursTransaction(Event event) {
         if (event.getAmount() == null || event.getAmount() <= 10000) {
@@ -200,7 +200,7 @@ public class EventProcessingService {
     }
 
     /**
-     * 📊 이상 점수 계산
+     *  이상 점수 계산
      */
     private double calculateAnomalyScore(List<String> anomalies) {
         if (anomalies.isEmpty()) {
@@ -232,14 +232,14 @@ public class EventProcessingService {
     }
 
     /**
-     * 📊 이벤트 통계 조회
+     *  이벤트 통계 조회
      */
     public Map<String, EventStats> getEventStats() {
         return new ConcurrentHashMap<>(eventStats);
     }
 
     /**
-     * 🔄 처리 결과 클래스
+     *  처리 결과 클래스
      */
     public static class ProcessingResult {
         private final boolean success;
@@ -263,7 +263,7 @@ public class EventProcessingService {
     }
 
     /**
-     * 🔍 이상 탐지 결과 클래스
+     *  이상 탐지 결과 클래스
      */
     public static class AnomalyDetectionResult {
         private final boolean hasAnomalies;
@@ -288,7 +288,7 @@ public class EventProcessingService {
     }
 
     /**
-     * 📊 이벤트 통계 클래스
+     *  이벤트 통계 클래스
      */
     public static class EventStats {
         private final String eventType;

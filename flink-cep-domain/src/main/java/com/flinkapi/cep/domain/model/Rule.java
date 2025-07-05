@@ -9,8 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 🎯 도메인 룰 엔티티 - 실시간 룰 정의의 핵심 도메인 모델
- * DDD 패턴으로 설계된 룰 엔티티
+ * 도메인 룰 엔티티 - 실시간 룰 정의의 핵심 도메인 모델
  */
 public class Rule implements Serializable {
     
@@ -57,7 +56,7 @@ public class Rule implements Serializable {
         this.ruleType = ruleType;
     }
 
-    // 🚀 Fluent API 스타일 빌더 메서드들
+    // Fluent API 스타일 빌더 메서드들
     public Rule withConditions(List<RuleCondition> conditions) {
         this.conditions = conditions;
         return this;

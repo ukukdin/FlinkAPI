@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 🎯 룰 조건 값 객체 - 이벤트 매칭 조건을 표현하는 Value Object
- * DDD 패턴으로 설계된 불변 값 객체
+ * 룰 조건 값 객체 - 이벤트 매칭 조건을 표현하는 Value Object
+ * 
  */
 public class RuleCondition implements Serializable {
     
@@ -51,7 +51,7 @@ public class RuleCondition implements Serializable {
         return new RuleCondition(this.field, this.operator, this.value, logicalOperator);
     }
 
-    // 🎯 핵심 비즈니스 로직 - 이벤트 매칭
+    // 핵심 비즈니스 로직 - 이벤트 매칭
     public boolean matches(Event event) {
         if (event == null || field == null || operator == null) {
             return false;

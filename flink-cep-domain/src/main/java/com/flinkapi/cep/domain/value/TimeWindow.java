@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * 🕐 시간 윈도우 값 객체 - 시간 범위를 표현하는 Value Object
- * DDD 패턴으로 설계된 불변 값 객체
+ * 시간 윈도우 값 객체 - 시간 범위를 표현하는 Value Object
+ *
  */
 public class TimeWindow implements Serializable {
     

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 🔍 룰 검증 도메인 서비스 - 룰의 유효성을 검증하는 핵심 도메인 서비스
+ *  룰 검증 도메인 서비스 - 룰의 유효성을 검증하는 핵심 도메인 서비스
  * DDD 패턴으로 설계된 도메인 서비스
  */
 public class RuleValidationService {
@@ -18,7 +18,7 @@ public class RuleValidationService {
     private static final Logger logger = LoggerFactory.getLogger(RuleValidationService.class);
 
     /**
-     * 🎯 룰 전체 검증
+     * 룰 전체 검증
      */
     public ValidationResult validateRule(Rule rule) {
         logger.debug("🔍 Validating rule: {}", rule.getRuleId());
@@ -62,7 +62,7 @@ public class RuleValidationService {
     }
 
     /**
-     * 🎯 조건 검증
+     *  조건 검증
      */
     public List<String> validateCondition(RuleCondition condition) {
         List<String> errors = new ArrayList<>();
@@ -83,7 +83,7 @@ public class RuleValidationService {
     }
 
     /**
-     * 🎯 룰 타입별 특별 검증
+     * 룰 타입별 특별 검증
      */
     private void validateRuleTypeSpecific(Rule rule, List<String> errors) {
         switch (rule.getRuleType()) {
@@ -117,7 +117,7 @@ public class RuleValidationService {
     }
 
     /**
-     * 🎯 이벤트와 룰 호환성 검증
+     *  이벤트와 룰 호환성 검증
      */
     public boolean canRuleApplyToEvent(Rule rule, Event event) {
         if (rule == null || event == null) {
@@ -137,7 +137,7 @@ public class RuleValidationService {
     }
 
     /**
-     * 🎯 룰 우선순위 검증
+     *  룰 우선순위 검증
      */
     public int calculateRulePriority(Rule rule) {
         if (rule == null || rule.getSeverity() == null) {
@@ -168,7 +168,7 @@ public class RuleValidationService {
     }
 
     /**
-     * 📊 검증 결과 클래스
+     *  검증 결과 클래스
      */
     public static class ValidationResult {
         private final boolean valid;
