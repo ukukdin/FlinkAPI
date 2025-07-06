@@ -24,7 +24,7 @@
 
 ---
 
-## 🎯 프로젝트 개요
+## 프로젝트 개요
 
 **FlinkAPI CEP Library**는 Apache Flink를 기반으로 한 실시간 복합 이벤트 처리(CEP) 라이브러리입니다. 
 DDD 아키텍처를 적용하여 확장 가능하고 유지보수가 용이한 구조로 설계되었습니다.
@@ -47,7 +47,7 @@ DDD 아키텍처를 적용하여 확장 가능하고 유지보수가 용이한 �
 
 ---
 
-## 🏗 아키텍처
+## 아키텍처
 
 FlinkAPI CEP Library는 DDD(Domain-Driven Design) 원칙을 따라 다음과 같은 레이어로 구성됩니다:
 
@@ -67,15 +67,15 @@ FlinkAPI CEP Library는 DDD(Domain-Driven Design) 원칙을 따라 다음과 같
 
 ---
 
-## 📦 모듈 구성
+## 모듈 구성
 
 | 모듈 | 설명 | 상태 |
 |------|------|------|
-| **flink-cep-domain** | 도메인 모델, 비즈니스 룰, 값 객체 | ✅ 완료 |
-| **flink-cep-application** | 애플리케이션 서비스, 포트, DTO | ✅ 완료 |
-| **flink-cep-infrastructure** | Flink 엔진, CEP 패턴 빌더, 룰 파서 | ✅ 완료 |
-| **flink-cep-interfaces** | REST API, 웹 컨트롤러 | 🚧 개발 중 |
-| **flink-cep-starter** | 올인원 스타터, 메인 애플리케이션 | ✅ 완료 |
+| **flink-cep-domain** | 도메인 모델, 비즈니스 룰, 값 객체 |  완료 |
+| **flink-cep-application** | 애플리케이션 서비스, 포트, DTO |  완료 |
+| **flink-cep-infrastructure** | Flink 엔진, CEP 패턴 빌더, 룰 파서 |  완료 |
+| **flink-cep-interfaces** | REST API, 웹 컨트롤러 |  개발 중 |
+| **flink-cep-starter** | 올인원 스타터, 메인 애플리케이션 |  완료 |
 
 ### 모듈별 주요 컴포넌트
 
@@ -99,7 +99,7 @@ FlinkAPI CEP Library는 DDD(Domain-Driven Design) 원칙을 따라 다음과 같
 
 ---
 
-## 🚀 시작하기
+## 시작하기
 
 ### 필수 요구사항
 
@@ -127,7 +127,7 @@ FlinkAPI CEP Library는 DDD(Domain-Driven Design) 원칙을 따라 다음과 같
 
 ---
 
-## 🔧 빌드 및 실행
+## 빌드 및 실행
 
 ### 전체 프로젝트 빌드
 
@@ -164,7 +164,7 @@ java -Dflink.env=production -jar flink-cep-starter/target/flink-cep-starter-1.0.
 
 ---
 
-## 💡 사용 예제
+## 사용 예제
 
 ### 기본 사용법
 
@@ -206,7 +206,7 @@ FlinkCEPApplication app = FlinkCEPApplication.create(env);
 
 ---
 
-## 📁 프로젝트 구조
+## 프로젝트 구조
 
 ```
 FlinkAPI/
@@ -256,39 +256,39 @@ FlinkAPI/
 
 ---
 
-## 🚧 개발 상태
+## 개발 상태
 
 ### 완료된 기능
 
-- ✅ DDD 아키텍처 기반 멀티모듈 구조
-- ✅ 도메인 모델 정의 (Rule, Event, Condition 등)
-- ✅ Flink CEP 패턴 빌더
-- ✅ 룰 엔진 기본 구현
-- ✅ 이벤트 스트리밍 서비스 틀
-- ✅ Maven 빌드 시스템
-- ✅ Fat JAR 패키징
-- ✅ 코드 정리 (이모지 제거 완료)
+- DDD 아키텍처 기반 멀티모듈 구조
+- 도메인 모델 정의 (Rule, Event, Condition 등)
+- Flink CEP 패턴 빌더
+- 룰 엔진 기본 구현
+- 이벤트 스트리밍 서비스 틀
+- Maven 빌드 시스템
+- Fat JAR 패키징
+- 코드 정리 (이모지 제거 완료)
 
 ### 개발 중인 기능
 
-- 🚧 REST API 인터페이스 (interfaces 모듈)
-- 🚧 실시간 룰 등록/수정 기능
-- 🚧 Kafka 연동
-- 🚧 데이터베이스 퍼시스턴스
-- 🚧 웹 대시보드
+- REST API 인터페이스 (interfaces 모듈)
+- 실시간 룰 등록/수정 기능
+- Kafka 연동
+- 데이터베이스 퍼시스턴스
+- 웹 대시보드
 
 ### 향후 계획
 
-- 📋 Spring Boot 통합
-- 📋 Docker 컨테이너 지원
-- 📋 Kubernetes 배포 가이드
-- 📋 성능 최적화
-- 📋 모니터링 및 메트릭스
-- 📋 자동화된 테스트 케이스 확장
+- Spring Boot 통합
+- Docker 컨테이너 지원
+- Kubernetes 배포 가이드
+- 성능 최적화
+- 모니터링 및 메트릭스
+- 자동화된 테스트 케이스 확장
 
 ---
 
-## 🤝 기여하기
+## 기여하기
 
 ### 개발 환경 설정
 
@@ -326,13 +326,13 @@ FlinkAPI/
 
 ---
 
-## 📄 라이선스
+## 라이선스
 
 이 프로젝트는 Apache License 2.0 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
 ---
 
-## 👥 개발자 정보
+## 개발자 정보
 
 - **개발팀**: IDC4 Team
 - **이메일**: eum714211@gmail.com
@@ -340,7 +340,7 @@ FlinkAPI/
 
 ---
 
-## 🔗 관련 링크
+## 관련 링크
 
 - [Apache Flink 공식 문서](https://flink.apache.org/)
 - [Flink CEP 가이드](https://nightlies.apache.org/flink/flink-docs-release-1.14/docs/libs/cep/)
